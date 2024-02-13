@@ -1,0 +1,2 @@
+#23.46. Externalizando o KeyStore: criando um ProtocolResolver para Base64
+org.springframework.context.ApplicationContextInitializer=com.algaworks.algafood.core.io.Base64ProtocolResolver

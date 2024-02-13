@@ -1,0 +1,44 @@
+
+#formato do arquivo
+version: "3.9"
+
+#especicar a rede
+networks:
+  algafood-network:
+    driver: bridge
+    
+#especificar cada container q vai ser usado    
+services:
+  algafood-mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: ""
+    ports:
+      - "3306:3306"
+    networks:
+      - algafood-network
+
+  algafood-api:
+    image: algafood-api
+    command: ["/wait-for-it.sh", "algafood-mysql:3306", "-t", "30", "--", "java", "-jar", "api.jar"]
+    environment:
+      DB_HOST: algafood-mysql
+    networks:
+      - algafood-network
+     #o container algafood-api so vai iniciar depois do mysql
+    depends_on:
+      - algafood-mysql
+  
+  algafood-proxy:
+    build: ./nginx
+    image: algafood-proxy
+    ports:
+      - "80:80"
+    networks:
+      - algafood-network
+    depends_on:
+      - algafood-api
+ 
+  
