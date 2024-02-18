@@ -11,8 +11,9 @@ public class SecurityController {
 		return "pages/login";
 	}
 	
-	@GetMapping("/oauth/confirm_acess")
+	@GetMapping("/oauth/confirm_access")
 	public String approval() {
 		return "pages/approval";
 	}
+	
 }

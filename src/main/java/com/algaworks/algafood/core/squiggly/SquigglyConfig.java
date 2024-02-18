@@ -19,8 +19,8 @@ import com.github.bohnman.squiggly.web.SquigglyRequestFilter;
 @Configuration
 public class SquigglyConfig {
 
-	@Bean
-	public FilterRegistrationBean<SquigglyRequestFilter> squigglyRequestFilter(ObjectMapper objectMapper){
+    @Bean
+    FilterRegistrationBean<SquigglyRequestFilter> squigglyRequestFilter(ObjectMapper objectMapper){
 		
 		Squiggly.init(objectMapper, new RequestSquigglyContextProvider("campos", null));
 		

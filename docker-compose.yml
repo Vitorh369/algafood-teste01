@@ -16,21 +16,31 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ROOT_PASSWORD: ""
     ports:
-      - "3306:3306"
+      - "13307:3306"
     networks:
       - algafood-network
+   
+   #para armazenar estrutura de dados em memoria. para escalar mais de um container
+  algafood-redis:
+        image: redis:6.2.1-alpine
+        networks:
+        - algafood-network
 
   algafood-api:
     image: algafood-api
     command: ["/wait-for-it.sh", "algafood-mysql:3306", "-t", "30", "--", "java", "-jar", "api.jar"]
     environment:
       DB_HOST: algafood-mysql
+      SPRING_SESSION_STORE_TYPE: redis
+      SPRING_REDIS_HOST: algafood-redis
+      SPRING_PROFILES_ACTIVE: developemnt
     networks:
       - algafood-network
      #o container algafood-api so vai iniciar depois do mysql
     depends_on:
       - algafood-mysql
   
+  #serve para sunir mais de um projeto
   algafood-proxy:
     build: ./nginx
     image: algafood-proxy
@@ -40,5 +50,17 @@ services:
       - algafood-network
     depends_on:
       - algafood-api
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
   

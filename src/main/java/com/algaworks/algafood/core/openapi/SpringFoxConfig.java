@@ -78,9 +78,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Import(BeanValidatorPluginsConfiguration.class)// importando class uma configuracao para essa class de configuracao
 public class SpringFoxConfig {
 
-	//VERSAO 1 DO PROJETO
-	@Bean
-	public Docket apiDocketV1() {
+    //VERSAO 1 DO PROJETO
+    @Bean
+    Docket apiDocketV1() {
 		
 		var typeResolver = new TypeResolver();
 		
@@ -185,10 +185,10 @@ public class SpringFoxConfig {
 	  return HttpAuthenticationScheme.JWT_BEARER_BUILDER.name("Authorization").build();
 	}
 
-	
-	//VERSAO DOIS DO PRJETO
-	@Bean
-	public Docket apiDocketV2() {
+
+    //VERSAO DOIS DO PRJETO
+    @Bean
+    Docket apiDocketV2() {
 		
 		var typeResolver = new TypeResolver();
 		
@@ -343,10 +343,10 @@ public class SpringFoxConfig {
 	            .referenceModel(ref -> ref.key(k -> k.qualifiedModelName(
 	                    q -> q.name("Problema").namespace("com.algaworks.algafood.api.exceptionhandler")))));
 	}
-	
-	//para fazer com que o SpringFox carregue o módulo de conversão de datas
-	@Bean
-	public JacksonModuleRegistrar springFoxJacksonConfig() {
+
+    //para fazer com que o SpringFox carregue o módulo de conversão de datas
+    @Bean
+    JacksonModuleRegistrar springFoxJacksonConfig() {
 		return objectMapper -> objectMapper.registerModule(new JavaTimeModule());
 	}
 

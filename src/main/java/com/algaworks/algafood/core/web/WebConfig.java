@@ -15,17 +15,17 @@ public class WebConfig implements WebMvcConfigurer {
 	@Autowired
 	ApiDeprecationHandler apiDeprecationHandler;
 
-	// 20.18. Depreciando uma versão da API
-	// para interceptar metodos depreciados
+    // 20.18. Depreciando uma versão da API
+    // para interceptar metodos depreciados
 //	@Override
 //	public void addInterceptors(InterceptorRegistry registry) {
 //		registry.addInterceptor(apiDeprecationHandler);
 //	}
 //	
 
-	// aula 17.5 filtro para Etags. aula de caches
-	@Bean
-	public Filter shallowEtagHeaderFilter() {
+    // aula 17.5 filtro para Etags. aula de caches
+    @Bean
+    Filter shallowEtagHeaderFilter() {
 		return new ShallowEtagHeaderFilter();
 	}
 }

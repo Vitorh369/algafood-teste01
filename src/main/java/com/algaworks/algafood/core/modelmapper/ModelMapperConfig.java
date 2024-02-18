@@ -16,11 +16,11 @@ import com.algaworks.algafood.domain.model.ItemPedido;
 @Configuration
 public class ModelMapperConfig {
 
-	// estou dizendo que agora tem um instancia de ModelMapper dentro do contexto do
-	// spring. Para que injeçao do moldeMapper funcione
-	
-	@Bean
-	public ModelMapper modelMapper() {
+    // estou dizendo que agora tem um instancia de ModelMapper dentro do contexto do
+    // spring. Para que injeçao do moldeMapper funcione
+    
+    @Bean
+    ModelMapper modelMapper() {
 
 		var modelMapper = new ModelMapper();
 		

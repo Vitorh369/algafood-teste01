@@ -22,6 +22,7 @@ import org.springframework.security.oauth2.provider.CompositeTokenGranter;
 import org.springframework.security.oauth2.provider.TokenGranter;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
+import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -91,6 +92,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			.userDetailsService(detailsService)
 			.reuseRefreshTokens(false)//para não reutilizar o refresh token. vai gera outro refresh token
 			//.tokenStore(redisTokenStore())
+			.authorizationCodeServices(new JdbcAuthorizationCodeServices(dataSource))
 			.accessTokenConverter(jwtAccessTokenConverter())
 			.tokenEnhancer(enhancerChain)
 			.approvalStore(approvalStore(endpoints.getTokenStore()))
@@ -104,11 +106,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		
 		return approvalStore;
 	}
-	
-	//23.45. Implementando o endpoint do JSON Web Key Set (JWKS)
-	//para obter chave publica atyras de uri
-	@Bean
-	public JWKSet jwkset() {
+
+    //23.45. Implementando o endpoint do JSON Web Key Set (JWKS)
+    //para obter chave publica atyras de uri
+    @Bean
+    JWKSet jwkset() {
 		 RSAKey.Builder builder = new RSAKey.Builder((RSAPublicKey)keyPair().getPublic())
 				 .keyUse(KeyUse.SIGNATURE)
 				 .algorithm(JWSAlgorithm.RS256)
@@ -116,11 +118,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		 
 		 return new JWKSet(builder.build());
 	}
-	
-	
-	//23.5. Gerando JWT com chave simétrica (HMAC SHA-256) no Authorization Server
-	@Bean
-	public JwtAccessTokenConverter jwtAccessTokenConverter() {
+
+
+    //23.5. Gerando JWT com chave simétrica (HMAC SHA-256) no Authorization Server
+    @Bean
+    JwtAccessTokenConverter jwtAccessTokenConverter() {
 		var jwtAccessTokenConverter = new JwtAccessTokenConverter();
 		//jwtAccessTokenConverter.setSigningKey("dasefwesfwefawdfwf1fe85f4e89f48e9s4f5e7fre588fe4fe7fe8");// chave para criptografia
 		
