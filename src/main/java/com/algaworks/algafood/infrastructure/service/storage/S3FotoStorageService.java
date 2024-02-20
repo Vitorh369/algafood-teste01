@@ -3,7 +3,6 @@ package com.algaworks.algafood.infrastructure.service.storage;
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.algaworks.algafood.core.storage.StorageProperties;
 import com.algaworks.algafood.domain.service.FotoStorageService;
@@ -14,7 +13,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 //aula 14.22, 14.23, 14.24, 14,25
-@Service
 public class S3FotoStorageService implements FotoStorageService{
 
 	@Autowired

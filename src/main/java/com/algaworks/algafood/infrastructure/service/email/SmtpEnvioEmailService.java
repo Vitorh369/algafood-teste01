@@ -46,6 +46,7 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
 		
 		return mimeMessage;
 	}
+}
 	
 	//aula 15.5
 //	protected String processarTemplates(Mensagem mensagem) {
@@ -61,7 +62,7 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
 //		
 //	}
 
-}
+
 
 
 

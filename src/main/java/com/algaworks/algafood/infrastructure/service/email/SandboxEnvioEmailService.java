@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 import com.algaworks.algafood.core.email.EmailProperties;
 
+
 public class SandboxEnvioEmailService extends SmtpEnvioEmailService {
 
 	@Autowired
@@ -22,4 +23,5 @@ public class SandboxEnvioEmailService extends SmtpEnvioEmailService {
 		
 		return mimeMessage;
 	}
+
 }

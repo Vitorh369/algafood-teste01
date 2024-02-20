@@ -1,11 +1,9 @@
 package com.algaworks.algafood.infrastructure.service.storage;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
 import com.algaworks.algafood.core.storage.StorageProperties;
@@ -14,7 +12,6 @@ import com.algaworks.algafood.domain.service.FotoStorageService;
 //armazenamento local de fotos
 //aula 14.8
 
-@Service
 public class LocalFotoStorageService implements FotoStorageService {
 
 	//@Value("${algafood.storage.local.diretorio-fotos}")
@@ -52,7 +49,7 @@ public class LocalFotoStorageService implements FotoStorageService {
 		
 			Path arquivoPath = getArquivoPath(fotoArquivo);
 			Files.deleteIfExists(arquivoPath);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new StorageException("Não foi possivel excluir arquivo. ", e);
 		}
 		
@@ -69,7 +66,7 @@ public class LocalFotoStorageService implements FotoStorageService {
 					.build();
 			
 			return fotoRecuperada;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new StorageException("Não foi possivel recuperar o arquivo. ", e);
 		}
 	}
