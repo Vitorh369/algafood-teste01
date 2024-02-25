@@ -204,6 +204,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
         <dependency>
             <groupId>io.springfox</groupId><!--biblioteca para documentacao do projeto -->
             <artifactId>springfox-bean-validators</artifactId><!-- biblioteca do springfox para integracao com bean validation-->
